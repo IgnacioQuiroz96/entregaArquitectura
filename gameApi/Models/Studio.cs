@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace gameApi.Models
+namespace gameApi.Models1
 {
     public partial class Studio
     {

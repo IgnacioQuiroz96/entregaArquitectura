@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace gameApi.Models
+namespace gameApi.Models1
 {
     public partial class Game
     {
@@ -13,13 +13,6 @@ namespace gameApi.Models
         public string GamePlatform { get; set; }
         public string Studio { get; set; }
 
-        public Game(string gameName, int gameId, string genre, string gamePlatform, string studio) //constructor, made for the post method. 
-        {
-            GameName = gameName;
-            GameId = gameId;
-            Genre = genre;
-            GamePlatform = gamePlatform;
-            Studio = studio;
-        }
+        public virtual GameEarning GameEarning { get; set; }
     }
 }

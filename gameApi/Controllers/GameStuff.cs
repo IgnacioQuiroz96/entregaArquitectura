@@ -1,4 +1,4 @@
-﻿using gameApi.Models;
+﻿using gameApi.Models1;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -97,12 +97,12 @@ namespace gameApi.Controllers
                        
         }
 
-        [HttpDelete("deletegame-{name}")]
-        public IEnumerable<Game> deletegame (string name)
+        [HttpDelete("deletegame-{id}")]
+        public IEnumerable<Game> deletegame (int id)
         {
             using(gameApiContext context = new gameApiContext())
             {
-                context.Games.Remove(context.Games.FirstOrDefault(e => e.GameName == name));
+                context.Games.Remove(context.Games.FirstOrDefault(e => e.GameId == id));
                 context.SaveChanges();
                 return context.Games.ToList();
             }
@@ -155,18 +155,51 @@ namespace gameApi.Controllers
 
         }
 
-        [HttpDelete("deletestudio-{name}")]
-        public IEnumerable<Studio> deletestudio(string name)
+        [HttpDelete("deletestudio-{id}")]
+        public IEnumerable<Studio> deletestudio(string id) //somehow studio id ended up being a string instead of an int, im rolling with it
         {
             using (gameApiContext context = new gameApiContext())
             {
-                context.Studios.Remove(context.Studios.FirstOrDefault(e => e.StudioName == name));
+                context.Studios.Remove(context.Studios.FirstOrDefault(e => e.StudioId == id));
                 context.SaveChanges();
                 return context.Studios.ToList();
             }
         }
+
+        [HttpGet("getvalue")]
+        public IEnumerable<GameEarning> getvalues() // returns all earnings made on the industrie (the ones on the database. )
+
+        {
+            using (var context = new gameApiContext())
+            {
+                return context.GameEarnings.ToList();
+            }
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //pre made object in json format for testing the post thingie 
 //{
 //   "gameName": "Battlefield 1",
@@ -177,4 +210,5 @@ namespace gameApi.Controllers
 //},
 
 // delete from dbo.game where name_name = "Battlefield 1";       /// use if the test actually works ///
+
 
